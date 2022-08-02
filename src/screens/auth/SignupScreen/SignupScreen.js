@@ -38,7 +38,6 @@ const SigninScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <FlashMessage position="bottom" />
       <Text style={styles.title}>BookShelf</Text>
       <Text style={styles.subTitle}>Sing Up</Text>
       <Text style={styles.text}>Create an account to continue</Text>

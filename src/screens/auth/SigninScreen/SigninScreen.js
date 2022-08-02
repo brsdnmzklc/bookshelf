@@ -12,6 +12,20 @@ const SigninScreen = ({navigation}) => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const handleSubmit = async () => {
+    if (email === '') {
+      showMessage({
+        message: "Email can't be blank",
+        type: 'danger',
+      });
+      return;
+    }
+    if (password === '') {
+      showMessage({
+        message: "Password can't be blank",
+        type: 'danger',
+      });
+      return;
+    }
     try {
       setLoading(true);
       await auth().signInWithEmailAndPassword(email, password);
@@ -28,7 +42,13 @@ const SigninScreen = ({navigation}) => {
   const handleNavigation = () => {
     navigation.navigate('SignupScreen');
   };
-
+  const forgotPassword = async () => {
+    await auth().sendPasswordResetEmail(email);
+    showMessage({
+      message: 'Reset email send to' + email,
+      type: 'success',
+    });
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>BookShelf</Text>
@@ -46,7 +66,9 @@ const SigninScreen = ({navigation}) => {
         isSecure={true}
         name="lock"
       />
-      <TouchableOpacity style={styles.touchableOpacity}>
+      <TouchableOpacity
+        style={styles.touchableOpacity}
+        onPress={forgotPassword}>
         <Text style={styles.subText}>Forgot Password?</Text>
       </TouchableOpacity>
       <Button title="Login" onPress={handleSubmit} loading={loading} />
