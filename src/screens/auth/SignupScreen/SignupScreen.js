@@ -16,6 +16,27 @@ const SigninScreen = ({navigation}) => {
   console.log(loading);
 
   const handleSubmit = async () => {
+    if (email === '') {
+      showMessage({
+        message: "Email can't be blank",
+        type: 'danger',
+      });
+      return;
+    }
+    if (password === '') {
+      showMessage({
+        message: "Password can't be blank",
+        type: 'danger',
+      });
+      return;
+    }
+    if (username === '') {
+      showMessage({
+        message: "Username can't be blank",
+        type: 'danger',
+      });
+      return;
+    }
     try {
       setLoading(true);
       await auth().createUserWithEmailAndPassword(email, password);

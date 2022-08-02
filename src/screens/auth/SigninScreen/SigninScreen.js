@@ -43,6 +43,13 @@ const SigninScreen = ({navigation}) => {
     navigation.navigate('SignupScreen');
   };
   const forgotPassword = async () => {
+    if (email === '') {
+      showMessage({
+        message: 'Please enter your email',
+        type: 'danger',
+      });
+      return;
+    }
     await auth().sendPasswordResetEmail(email);
     showMessage({
       message: 'Reset email send to' + email,
