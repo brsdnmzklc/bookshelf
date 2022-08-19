@@ -40,7 +40,7 @@ const SigninScreen = ({navigation}) => {
     try {
       setLoading(true);
       await auth().createUserWithEmailAndPassword(email, password);
-      await database().ref(`users/${auth().currentUser.uid}/`).set({
+      await database().ref(`bookshelf/users/${auth().currentUser.uid}/`).set({
         username: username,
       });
       setLoading(false);
